@@ -1,22 +1,16 @@
 def build_tree_outline(toc):
     tree = {}
     stack = [tree]
-
     for idx, item in enumerate(toc):
         level, title, start_page = item
-
         if idx < len(toc) - 1:
             next_start_page = toc[idx + 1][2]
         else:
             next_start_page = start_page
-
         end_page = next_start_page - 1 if next_start_page > start_page else start_page
-
         while len(stack) > level:
             stack.pop()
-
         current_level = stack[-1]
-
         new_item = {
             "title": title,
             "start_page": start_page,
@@ -24,9 +18,7 @@ def build_tree_outline(toc):
             "subsections": {},
         }
         current_level[title] = new_item
-
         stack.append(new_item["subsections"])
-
     return tree
 
 
